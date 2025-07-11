@@ -21,9 +21,9 @@ async function main () {
             const worksheet = workbook.addWorksheet(months[i]);
 
             worksheet.columns = [
-                { header: "Hodim ID", key: 'emp_id' },
+                { header: "Xodim ID", key: 'emp_id' },
                 { header: "Familiya Ism Sharfi", key: 'fullname' },
-                { header: "Bank daromadi", key: 'revenue' },
+                { header: "Xodimning bankga daromadi", key: 'revenue' },
                 { header: "Ishlab topilgan bonus", key: 'amount' },
             ]
 
@@ -92,7 +92,7 @@ async function main () {
                 ORDER BY ROUND(COALESCE(SUM(b.revenue), 0), 2);    
             `)).rows;
 
-            console.log(bonuses.length);
+            // console.log(bonuses.length);
 
             for (const bonus of bonuses) {
                 worksheet.addRow(bonus);
