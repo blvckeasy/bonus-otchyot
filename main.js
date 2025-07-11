@@ -23,8 +23,8 @@ async function main () {
             worksheet.columns = [
                 { header: "Xodim ID", key: 'emp_id' },
                 { header: "Familiya Ism Sharfi", key: 'fullname' },
-                { header: "Xodimning bankga daromadi", key: 'revenue' },
-                { header: "Ishlab topilgan bonus", key: 'amount' },
+                { header: "Xodimning bankga daromadi", key: 'revenue', style: { numFmt: "#,##0.00" } },
+                { header: "Ishlab topilgan bonus", key: 'amount', style: { numFmt: "#,##0.00" } },
             ]
 
             const bonuses = (await client.query(`
