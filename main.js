@@ -19,6 +19,13 @@ async function main () {
 
         for (let i = 0; i < months.length; i++) {
             const worksheet = workbook.addWorksheet(months[i]);
+
+            worksheet.columns = [
+                { header: "Hodim ID", key: 'emp_id' },
+                { header: "Bank daromadi", key: 'revenue' },
+                { header: "Ishlab topilgan bonus", key: 'amount' },
+            ]
+
             const bonuses = (await client.query(`
                 WITH all_bonuses AS (
                     SELECT 
@@ -75,9 +82,9 @@ async function main () {
 
                 SELECT 
                     e.emp_id,
-                    e.fullname  AS "Familiya Ism Sharif",    
-                    ROUND(COALESCE(SUM(b.revenue), 0), 2)   AS "Daromad",
-                    ROUND(COALESCE(SUM(b.amount), 0), 2)   AS "Bonus"
+                    e.fullname,    
+                    ROUND(COALESCE(SUM(b.revenue), 0), 2)   AS "revenue",
+                    ROUND(COALESCE(SUM(b.amount), 0), 2)   AS "amount"
                 FROM all_bonuses b
                     INNER JOIN cte e ON b.emp_id = e.emp_id
                 GROUP BY e.emp_id, e.fullname
