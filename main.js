@@ -89,7 +89,7 @@ async function main () {
                 FROM all_bonuses b
                     RIGHT JOIN cte e ON b.emp_id = e.emp_id
                 GROUP BY e.emp_id, e.fullname
-                ORDER BY ROUND(COALESCE(SUM(b.revenue), 0), 2);    
+                ORDER BY ROUND(COALESCE(SUM(b.revenue), 0), 2) DESC;    
             `)).rows;
 
             // console.log(bonuses.length);
