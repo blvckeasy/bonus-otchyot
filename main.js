@@ -22,6 +22,7 @@ async function main () {
 
             worksheet.columns = [
                 { header: "Hodim ID", key: 'emp_id' },
+                { header: "Familiya Ism Sharfi", key: 'fullname' },
                 { header: "Bank daromadi", key: 'revenue' },
                 { header: "Ishlab topilgan bonus", key: 'amount' },
             ]
@@ -88,7 +89,7 @@ async function main () {
                 FROM all_bonuses b
                     INNER JOIN cte e ON b.emp_id = e.emp_id
                 GROUP BY e.emp_id, e.fullname
-                ORDER BY e.emp_id;    
+                ORDER BY e.emp_id, ROUND(COALESCE(SUM(b.revenue), 0), 2);    
             `)).rows;
 
             for (const bonus of bonuses) {
