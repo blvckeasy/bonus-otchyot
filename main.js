@@ -87,10 +87,12 @@ async function main () {
                     ROUND(COALESCE(SUM(b.revenue), 0), 2)   AS "revenue",
                     ROUND(COALESCE(SUM(b.amount), 0), 2)   AS "amount"
                 FROM all_bonuses b
-                    INNER JOIN cte e ON b.emp_id = e.emp_id
+                    RIGHT JOIN cte e ON b.emp_id = e.emp_id
                 GROUP BY e.emp_id, e.fullname
-                ORDER BY e.emp_id, ROUND(COALESCE(SUM(b.revenue), 0), 2);    
+                ORDER BY ROUND(COALESCE(SUM(b.revenue), 0), 2);    
             `)).rows;
+
+            console.log(bonuses.length);
 
             for (const bonus of bonuses) {
                 worksheet.addRow(bonus);
